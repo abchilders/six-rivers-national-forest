@@ -1,0 +1,52 @@
+// Last modified: 2019/11/20
+
+Forest_Resource(INTERNAL_ID, resource_type)
+
+Rec_Area(RECAREAID, internal_id, objectid, recareaname, longitude, latitude, 
+	recareaurl, feedescription, open_season_start, operational_hours, 
+	open_season_end, forestname, reservation_info, markertype, markeractivity, 
+	markeractivitygroup, recareadescription, restrictions, recportal_unit_key, 
+	forestorgcode, infra_cn, shape, spotlightdisplay, attractiondisplay, 
+	accessibility, openstatus)
+	foreign key (internal_id) references Forest_Resource
+	
+Rec_Area_Activities(RECAREAID, ACTIVITY)
+	foreign key (recareaid) references Rec_Area
+
+Road(ID, internal_id, is_motor_vehicle_use_road, is_national_forest_system_road,
+	adminorg, bmp, emp, fid, gis_miles, globalid, jurisdicti, name, oper_maint, 
+	route_stat, rte_cn, security_id, seg_length, shape_len, surface_type, 
+	system)
+	foreign key (internal_id) references Forest_Resource
+
+Motor_Vehicle_Use_Road(ID, internal_id, atv, atv_dateso, bus, bus_dateso, districtna, 
+	field_id, forestname, fourwd_g_1, fourwd_gt5, highclea_1, highcleara, 
+	motorcyc_1, motorcycle, motorhome, motorhome_ , other_oh_1, other_oh_2, 
+	other_ohv_, otherwhe_1, otherwheel, passenge_1, passengerv, sbs_symbol, 
+	seasonal, symbol, ta_symbol, tracked__1, tracked__2, tracked__3, tracked_oh, 
+	truck, truck_date, twowd_gt_1, twowd_gt50)
+	foreign key(id) references Road
+	foreign key (internal_id) references Road
+	
+National_Forest_System_Road(ID, internal_id, congressio, county, functional, ivm_symbol, 
+	lanes, level_of_s, loc_error, managing_o, objective_, openforuse, 
+	psfr_class, primary_ma, service_li, symbol_cod, symbol_nam)
+	foreign key(id) references Road
+	foreign key (internal_id) references Road 
+
+Survey(SURVEY_ID, name, date_of_visit, surveyor_name, email, description, 
+	internal_id)
+	foreign key (internal_id) references Forest_Resource
+	
+Survey_Images(SURVEY_ID, IMAGE)
+	foreign key (survey_id) references Survey
+
+Rec_Area_Survey(SURVEY_ID, rec_area_condition, water_source_condition, 
+	water_source_details, weather_and_temperature)
+	foreign key (survey_id) references Survey
+
+Road_Survey(SURVEY_ID, mode_of_transportation,road_condition)
+	foreign key (survey_id) references Survey
+
+
+
