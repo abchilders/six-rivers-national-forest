@@ -161,58 +161,57 @@ create table National_Forest_System_Road
  foreign key (internal_id) references Road
 );
 
--- This is the base table for the Survey entity class. TODO: define data types
+-- This is the base table for the Survey entity class.
 
 drop table Survey cascade constraints; 
 
 create table Survey
-(survey_id, 
- name, 
- date_of_visit, 
- surveyor_name, 
- email, 
- description,
- internal_id,
+(survey_id		integer, 
+ name			varchar2(30)	not null, 
+ date_of_visit	date			not null, 
+ surveyor_name	varchar2(30)	not null, 
+ email			varchar2(30), 
+ description	varchar2(MAX),
+ internal_id	integer			not null,
  primary key (survey_id), 
  foreign key (internal_id) references Forest_Resource 
 );
 
 -- This is the table containing multivalued attribute "images" for the Survey 
--- entity class. TODO: define data types
+-- entity class. 
 
 drop table Survey_Images cascade constraints; 
 
 create table Survey_Images
-(survey_id, 
- image,
+(survey_id	integer, 
+ image		varchar2(MAX),
  primary key (survey_id, image),
  foreign key (survey_id) references Survey
 );
 
 -- This is the base table for the Rec Area Survey entity class, subclass of 
--- Survey. TODO: define data types 
+-- Survey. 
 
 drop table Rec_Area_Survey cascade constraints; 
 
 create table Rec_Area_Survey 
-(survey_id, 
- rec_area_condition, 
- water_source_condition,
- water_source_details, 
- weather_and_temperature,
+(survey_id					integer, 
+ rec_area_condition			varchar2(30)	check(rec_area_condition in ('Good', 'Needs some work', 'Bad', 'Non-existent')) not null, 
+ water_source_condition		varchar2(30)	check(water_source_condition in ('Dry', 'Stagnant', 'Trickle', 'Flowing', 'N/A')) not null,
+ water_source_details		varchar2(MAX), 
+ weather_and_temperature	varchar2(MAX),
  primary key (survey_id),
  foreign key (survey_id) references Survey
 );
 
--- This is the base table for the Road Survey entity class, subclass of Survey. 
--- TODO: define data types 
+-- This is the base table for the Road Survey entity class, subclass of Survey.  
 
 drop table Road_Survey cascade constraints; 
 
 create table Road_Survey 
-(survey_id, 
- mode_of_transportation,
- road_condition,
+(survey_id					integer, 
+ mode_of_transportation		varchar(30)	not null,
+ road_condition				varchar(40)	check(road_condition in ('Good shape and easy to follow', 'Needs some work', 'Hard to follow', 'Non-existent')) not null,
  primary key (survey_id),
  foreign key (survey_id) references Survey
 );
