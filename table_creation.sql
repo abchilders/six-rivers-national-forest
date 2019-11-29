@@ -1,4 +1,4 @@
-/*Group 3A*/
+/* Group 3A */
 
 -- This is the base table for Forest Resource entity class.
 
@@ -15,32 +15,30 @@ create table Forest_Resource
 drop table Rec_Area cascade constraints;
 
 create table Rec_Area
-(recareaid	integer, 
- internal_id	integer,
- objectid	integer, 
- recareaname	varchar2(25), 
- longitude	integer, 
- latitude	integer, 
- recareaurl	varchar2(25) //maybe?,
- feedescription	varchar2(25),
- open_season_start	date,
- operational_hours	varchar2(25), 
- open_season_end	date,
- forestname	varchar2(25), 
- reservation_info	varchar2(25),
- markertype	//idk what to put here,
- markeractivity	varchar2(18), 
- markeractivitygroup	varchar2(23),
- recareadescription	varchar2(//it has a lot of paragraphs),
- restrictions	varchar2(//idk a lot of points here), 
- recportal_unit_key, 
- forestorgcode,
- infra_cn, 
- shape, 
- spotlightdisplay	char,
- attractiondisplay	char, 
- accessibility	varchar2(3) // going to assume this is a yes and no ,
- openstatus	varchar2(6),
+(recareaid				integer, 
+ internal_id			integer,
+ recareanam				varchar2(140), 
+ longitude				float, 
+ latitude				float, 
+ recareaurl				varchar2(MAX),
+ feedescrip				varchar2(140),
+ open_season_start		date,
+ operational_hours		varchar2(140), 
+ open_season_end		date,
+ forestname				varchar2(25), 
+ reservation_info		varchar2(140),
+ markertype				varchar2(MAX),
+ markeractivity			varchar2(140), 
+ markeractivitygroup	varchar2(140),
+ recareadescription		varchar2(MAX),
+ restrictions			varchar2(MAX), 
+ recportal_unit_key		integer, 
+ forestorgcode			integer,
+ infra_cn				float, 
+ spotlightdisplay		char	check(spotlightdisplay in ('Y', 'N')),
+ attractiondisplay		char	check(attractiondisplay in ('Y', 'N')), 
+ accessibility			char	check(attractiondisplay in ('Y', 'N')),
+ openstatus				varchar2(6)	check(openstatus in ('none', 'closed', 'open')),
  primary key (recareaid),
  foreign key (internal_id) references Forest_Resource
 );
@@ -51,8 +49,8 @@ create table Rec_Area
 drop table Rec_Area_Activities cascade constraints; 
 
 create table Rec_Area_Activities 
-(recareaid integer, 
- activity varchar2(30),
+(recareaid 	integer, 
+ activity 	varchar2(30),
  primary key (recareaid, activity),
  foreign key (recareaid) references Rec_Area
 );
