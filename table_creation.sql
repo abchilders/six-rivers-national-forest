@@ -15,7 +15,7 @@ create table Forest_Resource
 drop table Rec_Area cascade constraints;
 
 create table Rec_Area
-(recareaid				integer, 
+(recareaid				integer		unique, 
  internal_id			integer,
  recareanam				varchar2(140), 
  longitude				float, 
@@ -35,11 +35,11 @@ create table Rec_Area
  recportal_unit_key		integer, 
  forestorgcode			integer,
  infra_cn				float, 
- spotlightdisplay		char	check(spotlightdisplay in ('Y', 'N')),
- attractiondisplay		char	check(attractiondisplay in ('Y', 'N')), 
- accessibility			char	check(attractiondisplay in ('Y', 'N')),
+ spotlightdisplay		char		check(spotlightdisplay in ('Y', 'N')),
+ attractiondisplay		char		check(attractiondisplay in ('Y', 'N')), 
+ accessibility			char		check(attractiondisplay in ('Y', 'N')),
  openstatus				varchar2(6)	check(openstatus in ('none', 'closed', 'open')),
- primary key (recareaid),
+ primary key (internal_id),
  foreign key (internal_id) references Forest_Resource
 );
  
@@ -49,84 +49,85 @@ create table Rec_Area
 drop table Rec_Area_Activities cascade constraints; 
 
 create table Rec_Area_Activities 
-(recareaid 	integer, 
- activity 	varchar2(30),
- primary key (recareaid, activity),
- foreign key (recareaid) references Rec_Area
+(internal_id 	integer, 
+ activity 		varchar2(30),
+ primary key (internal_id, activity),
+ foreign key (internal_id) references Rec_Area
 );
 
--- This is the base table for the Road entity class. TODO: define data types
+-- This is the base table for the Road entity class. 
 
 drop table Road cascade constraints; 
 
 create table Road
-(id, 
- internal_id, 
- is_motor_vehicle_use_road, 
- is_national_forest_system_road,
- adminorg, 
- bmp, 
- emp, 
- fid, 
- gis_miles, 
- globalid, 
- jurisdicti, 
- name, 
- oper_maint,
- route_stat, 
- rte_cn, 
- security_id, 
- seg_length, 
- shape_len, 
- surface_type,
- system,
- primary key (id), 
+(id								varchar2(10)	unique, 
+ internal_id					integer, 
+ is_motor_vehicle_use_road		char			check(is_motor_vehicle_use_road in('y', 'n')) not null, 
+ is_national_forest_system_road	char			check(is_national_forest_system_road in('y', 'n')) not null,	
+ adminorg						integer, 
+ bmp							float, 
+ emp							float, 
+ fid							integer, 
+ gis_miles						float, 
+ globalid						varchar2(140), 
+ jurisdicti						varchar2(30), 
+ name							varchar2(140), 
+ oper_maint						varchar2(140),
+ route_stat						varchar2(140), 
+ rte_cn							float, 
+ security_id					integer, 
+ seg_length						float, 
+ shape_len						float, 
+ surface_type					varchar2(140),
+ system							varchar2(140),
+ primary key (internal_id), 
  foreign key (internal_id) references Forest_resource
 );
 
 -- This is the base table for the Motor Vehicle Use Road entity class, subclass
--- of Road. TODO: define data types 
+-- of Road. 
 
 drop table Motor_Vehicle_Use_Road cascade constraints; 
 
 create table Motor_Vehicle_Use_Road
-(id, 
- internal_id, 
- atv, 
- atv_dateso, 
- bus, 
- bus_dateso, 
- districtna,
- field_id, 
- forestname, 
- fourwd_g_1, 
- fourwd_gt5, 
- highclea_1, 
- highcleara,
- motorcyc_1, 
- motorcycle, 
- motorhome, 
- motorhome_, 
- other_oh_1, 
- other_oh_2,
- other_ohv_, 
- otherwhe_1, 
- otherwheel, 
- passenge_1, 
- passengerv, 
- sbs_symbol,
- seasonal, 
- symbol, 
- ta_symbol, 
- tracked__1, 
- tracked__2, 
- tracked__3, 
- tracked_oh,
- truck, 
- truck_date, 
- twowd_gt_1, 
- twowd_gt50,
- primary key (id),
+(id				varchar2(10)	unique, 
+ internal_id	integer, 
+ atv			varchar2(6)		check(atv in ('open', 'closed')), 
+ atv_dateso		varchar2(20), 
+ bus			varchar2(6)		check(bus in ('open', 'closed')),  
+ bus_dateso		varchar2(20), 
+ districtna		varchar2(140),
+ field_id		varchar2(5), 
+ forestname		varchar2(140), 
+ fourwd_gt5		varchar2(6)		check(fourwd_gt5 in ('open', 'closed')),
+ fourwd_g_1		varchar2(20),   
+ highcleara		varchar2(6)		check(highcleara in ('open', 'closed')),
+ highclea_1		varchar2(20),
+ motorcycle		varchar2(6)		check(motorcycle in ('open', 'closed')),
+ motorcyc_1		varchar2(20),  
+ motorhome		varchar2(6)		check(motorhome in ('open', 'closed')), 
+ motorhome_		varchar2(20), 
+ other_oh_1		varchar2(6)		check(other_oh_1 in ('open', 'closed')), 
+ other_oh_2		varchar2(20),
+ other_ohv_		varchar2(6)		check(other_ohv_ in ('open', 'closed')), 
+ other_ohv1		varchar2(20),
+ otherwheel		varchar2(6)		check(otherwheel in ('open', 'closed')),	
+ otherwhe_1		varchar2(20),  
+ passengerv		varchar2(6)		check(passengerv in ('open', 'closed')),
+ passenge_1		varchar2(20),  
+ sbs_symbol		varchar2(140),
+ seasonal		varchar2(8), 
+ symbol			integer, 
+ ta_symbol		integer, 
+ tracked_oh		varchar2(6)		check(tracked_oh in ('open', 'closed')),
+ tracked__1		varchar2(20), 
+ tracked__2		varchar2(6)		check(tracked__2 in ('open', 'closed')), 
+ tracked__3		varchar2(20), 
+ truck			varchar2(6)		check(truck in ('open', 'closed')), 
+ truck_date		varchar2(20), 
+ twowd_gt50		varchar2(6)		check(twowd_gt50 in ('open', 'closed')),
+ twowd_gt_1		varchar2(20), 
+ primary key (internal_id),
  foreign key (id) references Road, 
  foreign key (internal_id) references Road
 );
@@ -154,7 +155,7 @@ create table National_Forest_System_Road
  service_li, 
  symbol_cod, 
  symbol_nam,
- primary key (id), 
+ primary key (internal_id), 
  foreign key (id) references Road, 
  foreign key (internal_id) references Road
 );
