@@ -133,28 +133,28 @@ create table Motor_Vehicle_Use_Road
 );
 
 -- This is the base table for the National Forest System Road entity class, 
--- subclass of Road. TODO: define data types 
+-- subclass of Road. 
 
 drop table National_Forest_System_Road cascade constraints; 
 
 create table National_Forest_System_Road
-(id, 
- internal_id, 
- congressio, 
- county, 
- functional, 
- ivm_symbol,
- lanes, 
- level_of_s, 
- loc_error, 
- managing_o, 
- objective_, 
- openforuse,
- psfr_class, 
- primary_ma, 
- service_li, 
- symbol_cod, 
- symbol_nam,
+(id				varchar2(10) 	unique, 
+ internal_id	integer, 
+ congressio		varchar2(140), 
+ county			varchar2(30), 
+ functional		varchar2(30), 
+ ivm_symbol		varchar2(140),
+ lanes			varchar2(140), 
+ level_of_s		varchar2(140), 
+ loc_error		varchar2(10), 
+ managing_o		integer, 
+ objective_		varchar2(140), 
+ openforuse		varchar2(5),
+ psfr_class		varchar2(140), 
+ primary_ma		varchar2(140), 
+ service_li		varchar2(140), 
+ symbol_cod		integer, 
+ symbol_nam		varchar2(140),
  primary key (internal_id), 
  foreign key (id) references Road, 
  foreign key (internal_id) references Road
