@@ -15,7 +15,7 @@ create table Forest_Resource
 drop table Rec_Area cascade constraints;
 
 create table Rec_Area
-(recareaid			integer		unique, 
+(fid				integer, 
  internal_id			integer,
  recareanam			varchar2(140), 
  longitude			float, 
@@ -25,13 +25,14 @@ create table Rec_Area
  open_season_start		date,
  operational_hours		varchar2(140), 
  open_season_end		date,
- forestname			varchar2(25), 
+ forestname			varchar2(140), 
  reservation_info		varchar2(140),
  markertype			varchar2(4000),
  markeractivity			varchar2(140), 
  markeractivitygroup		varchar2(140),
  recareadescription		varchar2(4000),
- restrictions			varchar2(4000), 
+ restrictions			varchar2(4000),
+ recareaid                      integer         unique, 
  recportal_unit_key		integer, 
  forestorgcode			integer,
  infra_cn			float, 
