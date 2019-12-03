@@ -8,3 +8,5 @@ start table_creation.sql
 start forest_resource_population.sql
 
 start rec_area_population.sql
+
+start rec_area_activities_population.sql
