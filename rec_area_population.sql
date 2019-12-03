@@ -5,17 +5,15 @@ prompt ===
 -- To escape ampersands in data:
 set define off 
 
-/*DEFAULT: DO NOT INCLUDE IN FINAL THING 
+-- Template for insertion: 
 
-insert into Rec_Area(fid, internal_id, recareanam, longitude, latitude, recareaurl, 
-       feedescrip, open_season_start, operational_hours, open_season_end, forestname, 
-       reservation_info, markertype, markeractivity, markeractivitygroup, 
-       recareadescription, restrictions, recareaid, recportal_unit_key, forestorgcode,
-       infra_cn, spotlightdisplay, attractiondisplay, openstatus)
-values
-();
-
-*/
+--insert into Rec_Area(fid, internal_id, recareanam, longitude, latitude, recareaurl, 
+--     feedescrip, open_season_start, operational_hours, open_season_end, forestname, 
+--     reservation_info, markertype, markeractivity, markeractivitygroup, 
+--     recareadescription, restrictions, recareaid, recportal_unit_key, forestorgcode,
+--     infra_cn, spotlightdisplay, attractiondisplay, accessibility, openstatus)
+--values
+--();
 
 insert into Rec_Area(fid, internal_id, recareanam, longitude, latitude, recareaurl,
        forestname,
