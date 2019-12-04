@@ -1,0 +1,55 @@
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #navbar {
+        list-style-type: none;
+        border-style: groove;
+        background-color: gray;
+        margin: 0;
+        padding: 0;
+        font-color: black;
+        text-align: center;
+      }
+      #navbar li, #navbar a {
+        display: inline;
+        border: thin solid #333;
+        font-size: 20px;
+        font-color: black;
+        background-color: lightgray;
+      }
+
+      #navbar li {
+        margin: 15px;
+      }
+      #maparea {
+        height: 75%;
+        width: 100%;
+        display: flex;
+      }
+      #mapitems {
+        border-style: solid;
+        flex: 1;
+
+      }
+      #mapitemstitle {
+        text-align: center;
+      }
+
+      #map {
+        height: 100%;
+        width: 75%;
+        border: thin solid #333;
+      }
+/*
+      #capture {
+		height: 50%;
+        width: 75%;
+        background-color: #ECECFB;
+        border: thin solid #333;
+        border-left: none;
+      }
+*/

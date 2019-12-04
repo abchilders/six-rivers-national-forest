@@ -3,39 +3,117 @@
 <html>
 
   <head>
-    <title>Simple Map</title>
+    <title>Six Rivers</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
+      #navbar {
+	list-style-type: none;
+	border-style: groove;
+	background-color: gray;
+	margin: 0;
+	padding: 0;
+	font-color: black;
+	text-align: center;
+      }
+      li, a {
+	display: inline;
+	border: thin solid #333;
+	font-size: 20px;
+	font-color: black;
+	background-color: lightgray;
+      }
+
+      li {
+	margin: 15px;
+      }
+      #maparea {
+	height: 75%;
+	width: 100%;
+	display: flex;
+      }
+      #mapitems {
+	border-style: solid;
+	flex: 1;
+
+      }
+      #mapitemstitle {
+	text-align: center;
+      }
+
+      #map {
+        height: 100%;
+	width: 75%;
+	border: thin solid #333;
+      }
+/* 
+      #capture {
+        height: 50%;
+        width: 75%;
+        background-color: #ECECFB;
+        border: thin solid #333;
+        border-left: none;
+      }
+*/
     </style>
   </head>
 
 <body>
-<h1> CS 458 Six Rivers Trail Map Site </h1>
+  <h1>Six Rivers National Forest</h1>
 
-  <div id="map"></div>
+  <ul id="navbar">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="./trails/trails.php">Trails</a></li>
+    <li><a href="submit.html">Report</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+
+<br><br>
+
   <script>
-    var map;
     function initMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -34.397, lng: 150.644},
+	//var src = 'https://www.dropbox.com/s/6sy28ijauh5me2f/SixRivers.kmz?dl=1';
+	//var src = 'http://nrs-projects.humboldt.edu/cs458/Motor_Vehicle_Use_Map__Roads.kmz?dl=1';
+	//var src = 'https://www.dropbox.com/s/6cyrcq7067fh8m6/colorchanged-merged.kml?dl=1';
+	//var src = 'https://www.dropbox.com/s/y0w5d4dcpa98mhi/Motor_Vehicle_Use_Map__Roads.kml?dl=1';
+	//var src = 'https://www.dropbox.com/s/f5070mwm1zrw8c6/mygeodata_merged.kml?dl=1';	
+	var src = 'http://nrs-projects.humboldt.edu/~jlm1455/cs458/SR-MVRoads.kml'
+        var map = new google.maps.Map(document.getElementById('map'), {
+        center: new google.maps.LatLng(41.2623, -123.5677),
         zoom: 8
-      });
+      	});
+
+    	var kmlLayer = new google.maps.KmlLayer(src,
+	{
+	preserveViewport: true,
+	map: map
+      	});
     }
+
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=INSERTAPIKEYHERE&callback=initMap"
-  async defer></script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFUnoe7nvyiGLwpNZPR_cTxbU7stZKtsQ&callback=initMap"
+  ></script>
+
+<div id=maparea>
+  <div id="mapitems">
+    <h3 id="mapitemstitle"> Items </h3> 
+    <hr></hr>
+  </div>
+  <div id="map"></div>
+</div>
+
+<br></br>
+<hr></hr>
+
 
 </body>
 </html>
