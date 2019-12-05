@@ -15,3 +15,4 @@ start motor_vehicle_road_population.sql
 
 start rec_area_activities_population.sql
 
+start survey_sequence.sql
