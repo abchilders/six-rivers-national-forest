@@ -12,8 +12,7 @@
         *   and exits the current PHP document
 
     by: Sharon Tuttle
-
-    requires: 328footer.html
+    modified by: Alex Childers
 =====*/
 
 function destroy_and_exit($complaint)
@@ -24,7 +23,5 @@ function destroy_and_exit($complaint)
     <p> <a href="<?= htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES) ?>">
         Try again </a> </p>
     <?php
-    require_once("328footer.html");
-    session_destroy();
     exit;
 }
