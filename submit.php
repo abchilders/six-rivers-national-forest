@@ -1,4 +1,8 @@
 <?php
+/* 	Creates and handles the form that allows users to submit reports about 
+	roads and recreation areas. 
+*/
+
 ini_set('display_errors', 1);
         error_reporting(E_ALL);
 
@@ -9,6 +13,7 @@ ini_set('display_errors', 1);
         require_once("destroy_and_exit.php");
 		require_once("get_resource_name.php"); 
 		require_once("add_survey_data.php"); 
+		require_once("add_subtable_data.php"); 
 		
 if(array_key_exists("submit", $_POST))
 {
@@ -57,57 +62,14 @@ if(array_key_exists("submit", $_POST))
 	// insert basic survey into Survey table
 	$survey_id = add_survey_data($internal_id, $name, $conn); 
 	
-	// then add remaining, road- or rec area-specific survey info into 
-	// database 
-	if($type === 'road')
-	{
-		// start building the insert statement 
-		$road_insert_str = 'insert into Road_Survey(survey_id, 
-			mode_of_transportation'; 
-		$road_insert_values = 'values (:survey_id, :mode_of_transportation'; 
-		
-		// retrieve values from $_POST 
-		$mode_of_transportation = strip_tags($_POST['mode_of_transportation']); 
-		
-		if(array_key_exists("road_condition", $_POST))
-		{
-		$road_condition = strip_tags($_POST['road_condition']); 
-		$road_insert_str .= ', road_condition'; 
-		$road_insert_values .= ', :road_condition';
-		}
-		
-		// close insert statement 
-		$road_insert_values .= ')'; 
-		$road_insert_str .= ') ' . $road_insert_values; 
-		
-		// parse the insert statement 
-		$road_insert_stmt = oci_parse($conn, $road_insert_str); 
-		
-		// bind variables and execute insertion to Survey 
-		oci_bind_by_name($road_insert_stmt, ':survey_id', $survey_id); 
-		oci_bind_by_name($road_insert_stmt, ':mode_of_transportation', 
-			$mode_of_transportation);  
-		if(array_key_exists("road_condition", $_POST)) 
-		{
-			$road_condition = strip_tags($_POST['road_condition']);
-			oci_bind_by_name($road_insert_stmt, ':road_condition', $road_condition);
-		}
-		
-		oci_execute($road_insert_stmt); 
-		
-		// free statement when done 
-		oci_free_statement($road_insert_stmt); 
-	}
-	//else // type === 'rec_area'
-	//{
-		
-	//}
-	
-	// call add_subtable_survey to update the database (TODO: pl/sql) 
-		// if type is road, insert into road with appropriate attribs 
-		// if type is rec_area, " 
+	// insert additional data depending on whether survey is for a road or rec 
+	// area 
+	add_subtable_data($type, $survey_id, $conn); 
 
-    $thankYou="<p>Thank you! Your report has been submitted.</p>";
+	// message lets users know that the survey's been submitted 
+    $thank_you="<p>Thank you! Your report has been submitted.</p>";
+	
+	oci_close($conn); 
 }
 
 ?>
@@ -115,8 +77,6 @@ if(array_key_exists("submit", $_POST))
 <!DOCTYPE html>
 
 <!-- Creates a form for users to submit reports. --> 
-<!-- Uses: database_conn_params.php, destroy_and_exit.php, hsu_conn.php, 
-	create_report_dropdown.php --> 
 
 <html>
 
@@ -130,9 +90,9 @@ if(array_key_exists("submit", $_POST))
   <h1>Leave a Report</h1>
   
    <?php
-   if(isset($insert_str))
+   if(isset($thank_you))
    {
-	   ?> <?= $insert_str ?> <?= $date_of_visit ?> <?php
+	   ?> <?= $thank_you ?> <?php
    }
    ?>
 
@@ -247,7 +207,7 @@ if(array_key_exists("submit", $_POST))
 				<textarea rows="5" cols="20" id="water_source_details" 
 				name="water_source_details"></textarea>
 				
-				<label for="weather_and_temperature"> Weather and Temperature
+				<label for="weather_and_temperature"> Weather and temperature:
 				</label> 
 				<textarea rows="5" cols="20" id="weather_and_temperature" 
 				name="weather_and_temperature"></textarea>

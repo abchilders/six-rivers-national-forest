@@ -61,7 +61,7 @@ function get_resource_name($type, $internal_id, $conn)
 		// query database to get road name 
 		$name_query_str = "select recareanam
 						 from Rec_Area
-						 where internal_id = " . $_POST[internal_id];
+						 where internal_id = " . $internal_id;
 		$name_query = oci_parse($conn, $name_query_str);
 		oci_execute($name_query);
 		oci_fetch($name_query); 
