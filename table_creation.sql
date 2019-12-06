@@ -163,10 +163,10 @@ drop table Survey cascade constraints;
 
 create table Survey
 (survey_id	integer, 
- name		varchar2(30)	not null, 
+ name		varchar2(100)	not null, 
  date_of_visit	date		not null, 
- surveyor_name	varchar2(30)	not null, 
- email		varchar2(30), 
+ surveyor_name	varchar2(100)	not null, 
+ email		varchar2(100), 
  description	varchar2(4000),
  internal_id	integer		not null,
  primary key (survey_id), 
