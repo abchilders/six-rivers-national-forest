@@ -7,6 +7,8 @@ ini_set('display_errors', 1);
         require_once("hsu_conn.php");
         require_once("create_report_dropdown.php");
         require_once("destroy_and_exit.php");
+		require_once("get_resource_name.php"); 
+		require_once("add_survey_data.php"); 
 		
 if(array_key_exists("submit", $_POST))
 {
@@ -26,7 +28,7 @@ if(array_key_exists("submit", $_POST))
 			destroy_and_exit("Must input a surveyor name.");
 	}
 	
-	// does a surveyor name exist in $_POST? 
+	// does a date of visit exist in $_POST? 
 	if( (! array_key_exists("date_of_visit", $_POST)) or
 			($_POST["date_of_visit"] == "") or
 			(! isset($_POST["date_of_visit"])) )
@@ -50,116 +52,56 @@ if(array_key_exists("submit", $_POST))
 	$type = oci_result($fr_query, "RESOURCE_TYPE");
 	oci_free_statement($fr_query);
 	
+	$name = get_resource_name($type, $internal_id, $conn); 
+	
+	// insert basic survey into Survey table
+	$survey_id = add_survey_data($internal_id, $name, $conn); 
+	
+	// then add remaining, road- or rec area-specific survey info into 
+	// database 
 	if($type === 'road')
 	{
-		$insert_subtable = 'Road_Survey'; 
+		// start building the insert statement 
+		$road_insert_str = 'insert into Road_Survey(survey_id, 
+			mode_of_transportation'; 
+		$road_insert_values = 'values (:survey_id, :mode_of_transportation'; 
 		
-		// does a mode of transport exist in $_POST? 
-		if( (! array_key_exists("mode_of_transportation", $_POST)) or
-			($_POST["mode_of_transportation"] == "") or
-			(! isset($_POST["mode_of_transportation"])) )
+		// retrieve values from $_POST 
+		$mode_of_transportation = strip_tags($_POST['mode_of_transportation']); 
+		
+		if(array_key_exists("road_condition", $_POST))
 		{
-			destroy_and_exit("Must input a mode of transportation.");
+		$road_condition = strip_tags($_POST['road_condition']); 
+		$road_insert_str .= ', road_condition'; 
+		$road_insert_values .= ', :road_condition';
 		}
 		
-		// does a road condition exist in $_POST? 
-		if( (! array_key_exists("road_condition", $_POST)) or
-			($_POST["road_condition"] == "") or
-			(! isset($_POST["road_condition"])) )
+		// close insert statement 
+		$road_insert_values .= ')'; 
+		$road_insert_str .= ') ' . $road_insert_values; 
+		
+		// parse the insert statement 
+		$road_insert_stmt = oci_parse($conn, $road_insert_str); 
+		
+		// bind variables and execute insertion to Survey 
+		oci_bind_by_name($road_insert_stmt, ':survey_id', $survey_id); 
+		oci_bind_by_name($road_insert_stmt, ':mode_of_transportation', 
+			$mode_of_transportation);  
+		if(array_key_exists("road_condition", $_POST)) 
 		{
-			destroy_and_exit("Must select a road condition.");
+			$road_condition = strip_tags($_POST['road_condition']);
+			oci_bind_by_name($road_insert_stmt, ':road_condition', $road_condition);
 		}
 		
-		// query database to get road name 
-		$name_query_str = "select name
-						 from Road
-						 where internal_id = " . $internal_id;
-		$name_query = oci_parse($conn, $name_query_str);
-		oci_execute($name_query);
-		oci_fetch($name_query); 
-		$name = oci_result($name_query, "NAME");
-		oci_free_statement($name_query);
-	}
-	else if($type === 'rec_area') 
-	{
-		$insert_subtable = 'Rec_Area_Survey'; 
+		oci_execute($road_insert_stmt); 
 		
-		// does an area condition exist in $_POST? 
-		if( (! array_key_exists("rec_area_condition", $_POST)) or
-			($_POST["rec_area_condition"] == "") or
-			(! isset($_POST["rec_area_condition"])) )
-		{
-			destroy_and_exit("Must input a rec area condition.");
-		}
+		// free statement when done 
+		oci_free_statement($road_insert_stmt); 
+	}
+	//else // type === 'rec_area'
+	//{
 		
-		// does a water source condition exist in $_POST? 
-		if( (! array_key_exists("water_source_condition", $_POST)) or
-			($_POST["water_source_condition"] == "") or
-			(! isset($_POST["water_source_condition"])) )
-		{
-			destroy_and_exit("Must input a water source condition.");
-		}
-		
-		// query database to get road name 
-		$name_query_str = "select recareanam
-						 from Rec_Area
-						 where internal_id = " . $_POST[internal_id];
-		$name_query = oci_parse($conn, $name_query_str);
-		oci_execute($name_query);
-		oci_fetch($name_query); 
-		$name = oci_result($name_query, "RECAREANAM");
-		oci_free_statement($name_query);
-	}
-	else
-	{
-		// reports must describe either a road or a rec_area 
-		destroy_and_exit("Invalid report."); 
-	}
-	
-	// insert survey into Survey table
-	// first, build the insert statement 
-	$insert_str = 'insert into Survey(survey_id, name, date_of_visit, 
-		surveyor_name, internal_id'; 
-	$insert_values = "values(survey_id_seq.nextval, :name, 
-		to_date(:date_of_visit, 'yyyy-mm-dd'), 
-		:surveyor_name, :internal_id"; 
-	$date_of_visit = strip_tags($_POST['date_of_visit']);
-	$surveyor_name = strip_tags($_POST['surveyor_name']);
-	if(array_key_exists("email", $_POST))
-	{
-		$email = strip_tags($_POST['email']); 
-		$insert_str .= ', email'; 
-		$insert_values .= ', :email';
-	}
-	if(array_key_exists("email", $_POST))
-	{ 
-		$description = strip_tags($_POST['description']); 
-		$insert_str .= ', description';
-		$insert_values .= ', :description'; 
-	} 
-	$insert_values .= ')'; 
-	$insert_str .= ')' . $insert_values;
-	
-	// parse the insert statement 
-	$insert_stmt = oci_parse($conn, $insert_str); 
-	
-	// bind variables and execute insertion to Survey 
-	oci_bind_by_name($insert_stmt, ':name', $name); 
-	oci_bind_by_name($insert_stmt, ':date_of_visit', $date_of_visit); 
-	oci_bind_by_name($insert_stmt, ':surveyor_name', $surveyor_name); 
-	oci_bind_by_name($insert_stmt, ':internal_id', $internal_id); 
-	if(array_key_exists("email", $_POST)) 
-	{
-		$email = strip_tags($_POST['email']);
-		oci_bind_by_name($insert_stmt, ':email', $email);
-	}
-	if(array_key_exists("description", $_POST))
-	{
-		$description = strip_tags($_POST['description']);
-		oci_bind_by_name($insert_stmt, ':description', $description); 
-	}
-	oci_execute($insert_stmt); 
-	oci_free_statement($insert_stmt); 
+	//}
 	
 	// call add_subtable_survey to update the database (TODO: pl/sql) 
 		// if type is road, insert into road with appropriate attribs 
@@ -219,6 +161,10 @@ if(array_key_exists("submit", $_POST))
 			<label for="email"> Email: </label> 
 			<input type="email" id="email" name="email" />
 			
+			<label for="description"> Description, comments, adventures, stories,
+			or observations: </label> 
+			<textarea rows="5" cols="20" id="description" name="description"></textarea>
+			
 			<!-- form fields specifically for Road reports --> 
 			<div id="road_survey">
 				<label for="mode_of_transportation"> Mode of transportation: 
@@ -247,6 +193,7 @@ if(array_key_exists("submit", $_POST))
 				</fieldset>
 			</div>
 			
+			<!-- form fields specifically for Rec Area reports --> 
 			<div id="rec_area_survey">
 				<fieldset>
 					<legend> Condition of the area: </legend>
@@ -306,10 +253,6 @@ if(array_key_exists("submit", $_POST))
 				name="weather_and_temperature"></textarea>
 				
 			</div>
-			
-			<label for="description"> Description, comments, adventures, stories,
-			or observations: </label> 
-			<textarea rows="5" cols="20" id="description" name="description"></textarea>
 			
 		</fieldset>
 		<input type="submit" name="submit" />
