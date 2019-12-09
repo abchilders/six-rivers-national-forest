@@ -54,7 +54,7 @@ if(array_key_exists("submit", $_POST))
 	$fr_query = oci_parse($conn, $fr_query_str);
 	oci_execute($fr_query);
 	oci_fetch($fr_query); 
-	$type = oci_result($fr_query, "RESOURCE_TYPE");
+	$type = oci_result($fr_query, "RESOURCE_TYPE"); 
 	oci_free_statement($fr_query);
 	
 	$name = get_resource_name($type, $internal_id, $conn); 
@@ -84,12 +84,26 @@ if(array_key_exists("submit", $_POST))
     <title>Report</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
+	
+	<link href="http://nrs-projects.humboldt.edu/~st10/styles/normalize.css"
+          type="text/css" rel="stylesheet" />
+
+    <link href="site-style.css" type="text/css" rel="stylesheet" />
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+		defer="defer"> </script>
+	
+	<script src="toggle_form_controls.js" type="text/javascript" defer="defer">
+    </script>
+
 
   </head>
   <body>
   <h1>Leave a Report</h1>
   
    <?php
+   require_once("site-header.html"); 
+   
    if(isset($thank_you))
    {
 	   ?> <?= $thank_you ?> <?php
@@ -180,7 +194,7 @@ if(array_key_exists("submit", $_POST))
 					<legend> Water source: </legend> 
 					
 					<input type="radio" name="water_source_condition" id="dry" 
-					value="Dry" required="required" /> 
+					value="Dry" /> 
 					<label for="dry"> Dry </label> 
 					
 					<input type="radio" name="water_source_condition" id="stagnant" 
