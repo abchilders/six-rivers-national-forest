@@ -9,7 +9,7 @@ ini_set('display_errors', 1);
         require_once("hsu_conn.php");
         require_once("create_report_dropdown.php");
         require_once("destroy_and_exit.php");
-		//require_once("get_resource_name.php"); 
+		require_once("get_resource_name.php"); 
 		require_once("add_survey_data.php"); 
 		require_once("add_subtable_data.php"); 
 		

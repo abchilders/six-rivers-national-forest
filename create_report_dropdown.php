@@ -8,8 +8,8 @@
 function create_report_dropdown($conn)
 {
 ?>
-        <label for="fr"> Select the location you visited: </label>
-        <select id="fr" name="fr">
+        <label for="internal_id"> Select the location you visited: </label>
+        <select id="internal_id" name="internal_id">
         <?php
 		// query Road internal_id and name 
         $road_query_str = "select internal_id, name
