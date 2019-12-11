@@ -62,12 +62,12 @@ echo "<tr>
 <td><b>Last Updated</b></td>
 </tr>";
 
-while (oci_fetch($stid))
+while (oci_fetch($stid) && oci_fetch($stid2))
   {
     echo "<tr>";
     echo "<td>",oci_result($stid, 'NAME'), "</td>";
     echo "<td>",oci_result($stid2, 'ROAD_CONDITION'), "</td>";
-    echo "<td>",oci_result($stid2, 'date_of_visit'),"</td>";
+    echo "<td>",oci_result($stid2, 'DATE_OF_VISIT'),"</td>";
     echo "<tr>";
   }
 
@@ -93,12 +93,12 @@ echo "<tr>
 <td><b>Last Updated</b></td>
 </tr>";
 
-while (oci_fetch($stid))
+while (oci_fetch($stid) && oci_fetch($stid2))
   {
     echo "<tr>";
     echo "<td>",oci_result($stid, 'RECAREANAM'), "</td>";
-    echo "<td>",oci_result($stid2, 'rec_area_condition'), "</td>";
-    echo "<td>",oci_result($stid2, 'date_of_visit'),"</td>";
+    echo "<td>",oci_result($stid2, 'REC_AREA_CONDITION'),"</td>";
+    echo "<td>",oci_result($stid2, 'DATE_OF_VISIT'),"</td>";
     echo "<tr>";
   }
 echo "</table>";

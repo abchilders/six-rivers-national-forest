@@ -40,6 +40,14 @@ if(array_key_exists("submit", $_POST))
 	}
 	// log in to Oracle
 
+
+	$iniFile = fopen("../../private/db.ini","r") or die("Unable to open File");
+
+
+	$user = rtrim(fgetss($iniFile));
+	$pass = rtrim(fgetss($iniFile));
+
+
 	$conn = hsu_conn($user, $pass);
 	
 	// if we've reached here, we have successfully connected.
