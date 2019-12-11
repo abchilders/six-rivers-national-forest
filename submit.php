@@ -39,7 +39,11 @@ if(array_key_exists("submit", $_POST))
 			destroy_and_exit("Must input a surveyor name.");
 	}
 	// log in to Oracle
+
+	$user="jlm1455";
+	$pass="Sk00Stu44!";
 	$conn = hsu_conn($user, $pass);
+	
 	// if we've reached here, we have successfully connected.
 	$internal_id = strip_tags($_POST['internal_id']); 
 	

@@ -1,0 +1,24 @@
+Rec_Area(RECAREAID,internal_id,objectid,recareaname,longitude,latitude,recareaurl,feedescription,open_season_start,o\
+perational_hours ,open_season_end, forestname,reservation_info, markertype,markeractivity,markeractivitygroup,recare\
+adescription,restrictions,recportal_unit_key, forestorgcode,infra_cn,shape,spotlightdisplay,attractiondisplay,access\
+ibility,openstatus ,activities (MV))
+Rec_Area_Activites(RECAREAID, ACTIVITY)
+foreign_key (RECAREAID) references Rec_Area
+foreign_key (INTERNAL_ID) references Forest_Resource
+Motor_Vehicle_Use_Road(ID,atv, atv_dateso, bus, bus_dateso, districtna, field_id, forestname, fourwd_g_1, fourwd_gt5, highclea_1, highcleara, motorcyc_1, motorcycle, motorhome, motorhome_ , other_oh_1, other_oh_2, other_ohv_, otherwhe_1, otherwheel, passenge_1, passengerv, sbs_symbol, seasonal, symbol, ta_symbol, tracked__1, tracked__2, tracked__3, tracked_oh, truck, truck_date, twowd_gt_1, twowd_gt50)
+foreign_key(ID) references Road
+National_Forest_System_Road(ID,congressio, county, functional, ivm_symbol, lanes, level_of_s, loc_error, managing_o, objective_, openforuse, psfr_class, primary_ma, service_li, symbol_cod, symbol_nam )
+foreign_key(ID) references Road
+Road(ID,is_motor_vehicle_use_road, is_national_forest_system_road,internal_id,adminorg, bmp, emp, fid, gis_miles, globalid, jurisdicti, name, oper_maint, route_stat, rte_cn, security_id, seg_length, shape_len, surface_type, system)
+foreign_key (INTERNAL_ID) references Forest_Resource
+Forest_Resource(INTERNAL_ID, resource_type)
+Survey(SURVEY_ID,name, date_of_visit, surveyor_name, email, description, images (MV), internal_id)
+foreign_key (internal_id) references Forest_Resource
+Survey_Images(SURVEY_ID, IMAGE)
+foreign_key (SURVEY_ID) references Survey
+Rec_Area_Survey(SURVEY_ID,rec_area_condition, water_source_condition,water_source_details, weather_and_temperature)
+foreign_key (SURVEY_ID) references Survey
+Road_Survey(SURVEY_ID, mode_of_transportation,road_condition)
+foreign_key (SURVEY_ID) references Survey
+
+
