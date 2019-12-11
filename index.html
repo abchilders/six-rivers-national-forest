@@ -4,109 +4,101 @@
 
   <head>
     <title>Six Rivers</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      html, body {
+	
+	<style>
+		
+		html, body {
         height: 100%;
         margin: 0;
         padding: 0;
+		background-color: #ffc06e;
       }
-      #navbar {
-	list-style-type: none;
-	border-style: groove;
-	background-color: gray;
-	margin: 0;
-	padding: 0;
-	font-color: black;
-	text-align: center;
-      }
-      li, a {
-	display: inline;
-	border: thin solid #333;
-	font-size: 20px;
-	font-color: black;
-	background-color: lightgray;
-      }
+	  
+	  h1{
+		background-color:#ffc06e;
+		padding: 0;
+		margin: 0;
+		}
+		li{
+			font-size: 20px;
+			color: white;
+			background-color: #ffc06e;
+		}
+		ul{
+			background-color:#ffc06e;
+			color:white;
+		}
 
-      li {
-	margin: 15px;
-      }
-      #maparea {
-	height: 75%;
-	width: 100%;
-	display: flex;
-      }
-      #mapitems {
-	border-style: solid;
-	flex: 1;
-
-      }
-      #mapitemstitle {
-	text-align: center;
-      }
-
-      #map {
-        height: 100%;
-	width: 75%;
-	border: thin solid #333;
-      }
-      #infoTxt {
-	text-align: center;
+		#maparea {
+			height: 75%;
+			width: 100%;
+			display: flex;
+			background-color: #ffc06e;
+		}
+		#mapitems {
+			border-style: solid;
+			flex: 1;
+			background-color: #deacff;
+		}
+		#mapitemstitle {
+			text-align: center;
+		}
+		#map {
+			height: 100%;
+			width: 75%;
+			border: thin solid #333;
+		}
+		#infoTxt {
+			text-align: center;
 	
-      }
-/* 
-      #capture {
-        height: 50%;
-        width: 75%;
-        background-color: #ECECFB;
-        border: thin solid #333;
-        border-left: none;
-      }
-*/
-    </style>
+		}
+		
+
+
+	</style>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://users.humboldt.edu/snp242/public_html/six-rivers-national-forest/site-style.css" 
+          type="text/css" rel="stylesheet" />
+
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+   
   </head>
 <body>
 
   <h1>Six Rivers National Forest</h1>
 
-  <ul id="navbar">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="trails.php">Trails</a></li>
-    <li><a href="submit.php">Report</a></li>
-    <li><a href="contact.php">Contact</a></li>
-    <li><a href="about.php">About</a></li>
+  <ul class="nav nav-pills nav-justified">
+    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+    <li class="nav-item"><a class="nav-link" href="trails.php">Trails</a></li>
+    <li class="nav-item"><a class="nav-link" href="submit.php">Report</a></li>
+    <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+    <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
   </ul>
 
-<br><br>
+
+
 
   <script>
     function initMap() {
-
-
 	var src = 'http://nrs-projects.humboldt.edu/~jlm1455/cs458/SR-MVRoads.kml'
         var map = new google.maps.Map(document.getElementById('map'), {
           center: new google.maps.LatLng(41.2623, -123.5677),
           zoom: 8
       	});
-
     	var kmlLayer = new google.maps.KmlLayer(src,
 	{
 	  preserveViewport: true,
 	  map: map
       	});
-
 	kmlLayer.addListener('click',function(event) {
 	  var content = event.featureData.infoWindowHtml;
 	  var legendBox = document.getElementById('infoTxt');
 	  legendBox.innerHTML = content;
         });
-
     }
-
-
   </script>
   <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFUnoe7nvyiGLwpNZPR_cTxbU7stZKtsQ&callback=initMap"
@@ -117,18 +109,14 @@
 
 <div id=maparea>
   <div id="mapitems">
-    <h3 id="mapitemstitle"> Info </h3> 
-    <hr></hr>
-    <div id="infoTxt"></div>
+    <h2 id="mapitemstitle"> Info </h2> 
+    <hr> <div id="infoTxt"> </div> <hr/>  
   </div>
   <div id="map"></div>
 </div>
 
-<br></br>
-<hr></hr>
 
-<div id=xx></div>
+<!--<div id=xx> </div>-->
 
 </body>
 </html>
-
