@@ -77,24 +77,49 @@
 
 
 
-
   <script>
     function initMap() {
-	var src = 'http://nrs-projects.humboldt.edu/~jlm1455/cs458/SR-MVRoads.kml'
+	var src1 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-MVRoads.kml';
+	var src2 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-RecAreaActivities.kml';
+	var src3 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-RecOpps.kml';
         var map = new google.maps.Map(document.getElementById('map'), {
           center: new google.maps.LatLng(41.2623, -123.5677),
           zoom: 8
       	});
-    	var kmlLayer = new google.maps.KmlLayer(src,
+
+    	var kmlLayer1 = new google.maps.KmlLayer(src1,
 	{
 	  preserveViewport: true,
 	  map: map
       	});
-	kmlLayer.addListener('click',function(event) {
+	  kmlLayer1.addListener('click',function(event) {
 	  var content = event.featureData.infoWindowHtml;
 	  var legendBox = document.getElementById('infoTxt');
 	  legendBox.innerHTML = content;
         });
+
+	var kmlLayer2 = new google.maps.KmlLayer(src2,
+	{
+	  preserveViewport: true,
+	  map: map
+	});
+	  kmlLayer2.addListener('click',function(event) {
+	  var content = event.featureData.infoWindowHtml;
+	  var legendBox = document.getElementById('infoTxt');
+	  legendBox.innerHTML = content;
+	});
+
+	var kmlLayer3 = new google.maps.KmlLayer(src3,
+	{
+	  preserveViewport: true,
+	  map: map
+	});
+	  kmlLayer3.addListener('click',function(event) {
+	  var content = event.featureData.infoWindowHtml;
+	  var legendBox = document.getElementById('infoTxt');
+	  legendBox.innerHTML = content;
+	});
+
     }
   </script>
   <script async defer
