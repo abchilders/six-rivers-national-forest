@@ -90,6 +90,8 @@ if(array_key_exists("submit", $_POST))
 
     <link href="site-style.css" type="text/css" rel="stylesheet" />
 	
+	<link href="submit.css" type="text/css" rel="stylesheet" />
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
 		defer="defer"> </script>
 	
@@ -113,121 +115,151 @@ if(array_key_exists("submit", $_POST))
 	<form action="<?= htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES) ?>"
      method="post">
 		<fieldset>
-			<!-- form fields standard to all reports -->
-			<?php
-			// connect to Oracle 
-			 
-			$conn = hsu_conn($user, $pass); 
-			
-			// create dropdown with all Forest Resource names 
-			create_report_dropdown($conn); 
-			?>
-			<br />
-			
-			<label for="surveyor_name"> Name: </label>
-			<input type="text" id="surveyor_name" name="surveyor_name" 
-			required="required" value="Anonymous Surveyor" />
-			
-			<label for="date_of_visit"> Date of visit: </label> 
-			<input type="date" id="date_of_visit" name="date_of_visit" 
-			required="required"/>
+			<div id="submit_form"> 
+				<!-- form fields standard to all reports -->
+				
+				<div id="location" class="grid-elem">
+					<?php
+					// connect to Oracle 
+					 
+					$conn = hsu_conn($user, $pass); 
+					
+					// create dropdown with all Forest Resource names 
+					create_report_dropdown($conn); 
+					?>
+				</div> 
+				
+				<div id="name" class="grid-elem">
+					<label for="surveyor_name"> Name: </label> <br/>
+					<input type="text" id="surveyor_name" name="surveyor_name" 
+					required="required" value="Anonymous Surveyor" />
+				</div> 
+				
+				<div id="date" class="grid-elem"> 
+					<label for="date_of_visit"> Date of visit: </label> <br/>
+					<input type="date" id="date_of_visit" name="date_of_visit" 
+					required="required"/>
+				</div> 
 
-			<label for="email"> Email: </label> 
-			<input type="email" id="email" name="email" />
-			
-			<label for="description"> Description, comments, adventures, stories,
-			or observations: </label> 
-			<textarea rows="5" cols="20" id="description" name="description"></textarea>
-			
-			<!-- form fields specifically for Road reports --> 
-			<div id="road_survey">
-				<label for="mode_of_transportation"> Mode of transportation: 
-				</label>
-				<input type="text" id="mode_of_transportation" 
-				name="mode_of_transportation" required="required" /> 
+				<div id="email_addr" class="grid-elem">
+					<label for="email"> Email: </label> <br/>
+					<input type="email" id="email" name="email" />
+				</div> 
 				
-				<fieldset>
-					<legend> Road condition: </legend>
-					
-					<input type="radio" name="road_condition" id="good_road"
-					value="Good shape and easy to follow" required="required"/> 
-					<label for="good_road"> Good shape and easy to follow </label> 
-					
-					<input type="radio" name="road_condition" id="ok_road"
-					value="Needs some work" /> 
-					<label for="ok_road"> Needs some work </label>
-					
-					<input type="radio" name="road_condition" id="bad_road"
-					value="Hard to follow" /> 
-					<label for="bad_road"> Hard to follow </label>
-					
-					<input type="radio" name="road_condition" id="fubar_road"
-					value="Non-existent" /> 
-					<label for="fubar_road"> Non-existent </label>
-				</fieldset>
-			</div>
-			
-			<!-- form fields specifically for Rec Area reports --> 
-			<div id="rec_area_survey">
-				<fieldset>
-					<legend> Condition of the area: </legend>
-					
-					<input type="radio" name="rec_area_condition" 
-					id="good_rec_area" value="Good" required="required"/>
-					<label for="good_rec_area"> Good </label> 
-					
-					<input type="radio" name="rec_area_condition" 
-					id="ok_rec_area" value="Needs some work" />
-					<label for="ok_rec_area"> Needs some work </label> 
-					
-					<input type="radio" name="rec_area_condition" 
-					id="bad_rec_area" value="Bad" />
-					<label for="bad_rec_area"> Bad </label> 
-					
-					<input type="radio" name="rec_area_condition" 
-					id="fubar_rec_area" value="Non-existent" />
-					<label for="fubar_rec_area"> Non-existent </label> 
-					
-				</fieldset>
+				<div id="desc" class="grid-elem"> 
+					<label for="description"> Description, comments, adventures, stories,
+					or observations: </label> <br/>
+					<textarea rows="5" cols="50" id="description" name="description"></textarea>
+				</div> 
 				
-				<fieldset> 
-					<legend> Water source: </legend> 
+				<!-- form fields specifically for Road reports --> 
+				<div id="road_survey">
+					<div id="transport" class="grid-elem"> 
+						<label for="mode_of_transportation"> Mode of transportation: 
+						</label> <br/>
+						<input type="text" id="mode_of_transportation" 
+						name="mode_of_transportation" required="required" /> 
+					</div> 
 					
-					<input type="radio" name="water_source_condition" id="dry" 
-					value="Dry" /> 
-					<label for="dry"> Dry </label> 
+					<div id="road_cond" class="grid-elem">
+						<fieldset>
+							<legend> Road condition: </legend>
+								<input type="radio" name="road_condition" id="good_road"
+								value="Good shape and easy to follow" required="required"/> 
+								<label for="good_road"> Good shape and easy to follow </label> 
+								<br />
+								
+								<input type="radio" name="road_condition" id="ok_road"
+								value="Needs some work" /> 
+								<label for="ok_road"> Needs some work </label>
+								<br />
+								
+								<input type="radio" name="road_condition" id="bad_road"
+								value="Hard to follow" /> 
+								<label for="bad_road"> Hard to follow </label>
+								<br />
+								
+								<input type="radio" name="road_condition" id="fubar_road"
+								value="Non-existent" /> 
+								<label for="fubar_road"> Non-existent </label> 
+								<br />
+						</fieldset>
+					</div>
+				</div>
+				
+				<!-- form fields specifically for Rec Area reports --> 
+				<div id="rec_area_survey">
+					<div id="rec_area_cond" class="grid-elem">
+						<fieldset>
+							<legend> Condition of the area: </legend>
+								<input type="radio" name="rec_area_condition" 
+								id="good_rec_area" value="Good" required="required"/>
+								<label for="good_rec_area"> Good </label> 
+								<br />
+								
+								<input type="radio" name="rec_area_condition" 
+								id="ok_rec_area" value="Needs some work" />
+								<label for="ok_rec_area"> Needs some work </label>
+								<br />								
+								
+								<input type="radio" name="rec_area_condition" 
+								id="bad_rec_area" value="Bad" />
+								<label for="bad_rec_area"> Bad </label> 
+								<br />
+								
+								<input type="radio" name="rec_area_condition" 
+								id="fubar_rec_area" value="Non-existent" />
+								<label for="fubar_rec_area"> Non-existent </label> 
+								<br />
+						</fieldset>
+					</div>
 					
-					<input type="radio" name="water_source_condition" id="stagnant" 
-					value="Stagnant" /> 
-					<label for="stagnant"> Stagnant </label> 
+					<div id="water_source" class="grid-elem">
+						<fieldset> 
+							<legend> Water source: </legend> 
+								<input type="radio" name="water_source_condition" id="dry" 
+								value="Dry" /> 
+								<label for="dry"> Dry </label> 
+								<br />
+								
+								<input type="radio" name="water_source_condition" id="stagnant" 
+								value="Stagnant" /> 
+								<label for="stagnant"> Stagnant </label> 
+								<br />
 
-					<input type="radio" name="water_source_condition" id="trickle" 
-					value="Trickle" /> 
-					<label for="trickle"> Trickle </label>
+								<input type="radio" name="water_source_condition" id="trickle" 
+								value="Trickle" /> 
+								<label for="trickle"> Trickle </label>
+								<br />
+								
+								<input type="radio" name="water_source_condition" id="flowing" 
+								value="Flowing" /> 
+								<label for="flowing"> Flowing </label>
+								<br />
+								
+								<input type="radio" name="water_source_condition" id="N/A" 
+								value="N/A" />
+								<label for="N/A"> Not applicable </label>
+								<br />
+						</fieldset> 
+					</div>
 					
-					<input type="radio" name="water_source_condition" id="flowing" 
-					value="Flowing" /> 
-					<label for="flowing"> Flowing </label>
+					<div id="water_details" class="grid-elem">
+						<label for="water_source_details"> Please give any additional
+						details you can provide on water depth, quality, and flow rate:
+						</label> <br/>
+						<textarea rows="5" cols="50" id="water_source_details" 
+						name="water_source_details"></textarea>
+					</div> 
 					
-					<input type="radio" name="water_source_condition" id="N/A" 
-					value="N/A" />
-					<label for="N/A"> Not applicable </label> 
-					
-				</fieldset> 
-				
-				<label for="water_source_details"> Please give any additional
-				details you can provide on water depth, quality, and flow rate:
-				</label> 
-				<textarea rows="5" cols="20" id="water_source_details" 
-				name="water_source_details"></textarea>
-				
-				<label for="weather_and_temperature"> Weather and temperature:
-				</label> 
-				<textarea rows="5" cols="20" id="weather_and_temperature" 
-				name="weather_and_temperature"></textarea>
-				
+					<div id="weather" class="grid-elem">
+						<label for="weather_and_temperature"> Weather and temperature:
+						</label> <br/>
+						<textarea rows="5" cols="50" id="weather_and_temperature" 
+						name="weather_and_temperature"></textarea>
+					</div> 
+				</div>
 			</div>
-			
 		</fieldset>
 		<input type="submit" name="submit" />
 	</form>
