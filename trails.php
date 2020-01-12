@@ -46,7 +46,7 @@ if (!$conn) {
 
 echo "<h2>Roads:</h2>";
 echo "<table border=1>";
-$stid = oci_parse($conn, "SELECT * from Survey");
+$stid = oci_parse($conn, "SELECT name from Survey");
 oci_execute($stid);
 $stid2 = oci_parse($conn,
 "SELECT Road_Survey.road_condition, Survey.date_of_visit
