@@ -7,7 +7,19 @@
 	Uses: hsu_conn.php, database_conn_params.php
 */
 
-require_once("database_conn_params.php");
+//require_once("database_conn_params.php");
+
+
+
+//Johns dumb method for dealing with DB auth
+        // ------------------------------------
+        //
+        $iniFile = fopen("../../private/db.ini","r") or die("Unable to open File");
+        $user = rtrim(fgetss($iniFile));
+        $pass = rtrim(fgetss($iniFile));
+        // ------------------------------------
+
+
 require_once('hsu_conn.php'); 
 
 $conn = hsu_conn($user, $pass); 
