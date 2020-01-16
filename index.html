@@ -1,144 +1,105 @@
 <!DOCTYPE html>
 
 <html>
+<head>
+  <title>Six Rivers</title>
+  <!-- Free hadrcoding style, according to oreginal this could be removed-->
+  <style> html,
+    body {height: 100%;
+          margin: 0;
+          padding: 0;
+          background-color: #ffc06e;}
+	  h1{background-color:#ffc06e;
+		   padding: 0;
+       margin: 0;}
+		li{font-size: 20px;
+			 color: white;
+			 background-color: #ffc06e;}
+		ul{background-color:#ffc06e;
+			color:white;}
 
-  <head>
-    <title>Six Rivers</title>
-	
-	<style>
-		
-		html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-		background-color: #ffc06e;
-      }
-	  
-	  h1{
-		background-color:#ffc06e;
-		padding: 0;
-		margin: 0;
-		}
-		li{
-			font-size: 20px;
-			color: white;
-			background-color: #ffc06e;
-		}
-		ul{
-			background-color:#ffc06e;
-			color:white;
-		}
-		#maparea {
-			height: 75%;
-			width: 100%;
-			display: flex;
-			background-color: #ffc06e;
-		}
-		#mapitems {
-			border-style: solid;
-			flex: 1;
-			background-color: #deacff;
-		}
-		#mapitemstitle {
-			text-align: center;
-		}
-		#map {
-			height: 100%;
-			width: 75%;
-			border: thin solid #333;
-		}
-		#infoTxt {
-			text-align: center;
-	
-		}
-		
-	</style>
+		#maparea {height: 75%;
+			       width: 100%;
+             display: flex;
+             background-color: #ffc06e;}
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link href="https://users.humboldt.edu/snp242/public_html/six-rivers-national-forest/site-style.css" 
-          type="text/css" rel="stylesheet" />
+		#mapitems {border-style: solid;
+              flex: 1;
+              background-color: #deacff;}
 
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-   
-  </head>
-<body>
+		#mapitemstitle {text-align: center;}
 
-  <h1>Six Rivers National Forest</h1>
+		#map {height: 100%;
+          width: 75%;
+          border: thin solid #333;}
 
-  <ul class="nav nav-pills nav-justified">
-    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-    <li class="nav-item"><a class="nav-link" href="trails.php">Trails</a></li>
-    <li class="nav-item"><a class="nav-link" href="submit.php">Report</a></li>
-    <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-    <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-  </ul>
+		#infoTxt {text-align: center;}
 
+  </style>
 
+<!-- Required meta tags -->
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
 
-  <script>
-    function initMap() {
-	var src1 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-MVRoads.kml';
-	var src2 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-RecAreaActivities.kml';
-	var src3 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-RecOpps.kml';
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: new google.maps.LatLng(41.2623, -123.5677),
-          zoom: 8
-      	});
+<!-- Documintations: please note that you can hardcode this website as you like and if client requires.-->
+<!-- In order to do so, you need to find a away linking this link (.html) in your .css file -->
+<!-- aka: //users.humboldt.edu/snp242/public_html/six-rivers-national-forest/site-style.css -->
 
-    	var kmlLayer1 = new google.maps.KmlLayer(src1,
-	{
-	  preserveViewport: true,
-	  map: map
-      	});
-	  kmlLayer1.addListener('click',function(event) {
-	  var content = event.featureData.infoWindowHtml;
-	  var legendBox = document.getElementById('infoTxt');
-	  legendBox.innerHTML = content;
-        });
+<!-- Bootstrap CSS-->
+<link rel="stylesheet"
+href="//maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
-	var kmlLayer2 = new google.maps.KmlLayer(src2,
-	{
-	  preserveViewport: true,
-	  map: map
-	});
-	  kmlLayer2.addListener('click',function(event) {
-	  var content = event.featureData.infoWindowHtml;
-	  var legendBox = document.getElementById('infoTxt');
-	  legendBox.innerHTML = content;
-	});
+</head>
+<body><h1>Six Rivers National Forest</h1><ul class="nav nav-pills nav-justified">
+  <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+  <li class="nav-item"><a class="nav-link" href="trails.php">Trails</a></li>
+  <li class="nav-item"><a class="nav-link" href="submit.php">Report</a></li>
+  <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+  <li class="nav-item"><a class="nav-link" href="about.php">About</a></li></ul>
+<script>function
+initMap(){
+  var src1 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-MVRoads.kml';
+  var src2 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-RecAreaActivities.kml';
+  var src3 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-RecOpps.kml';
+  var map = new google.maps.Map(document.getElementById('map'),
+  {center: new google.maps.LatLng(41.2623, -123.5677),zoom: 8});
 
-	var kmlLayer3 = new google.maps.KmlLayer(src3,
-	{
-	  preserveViewport: true,
-	  map: map
-	});
-	  kmlLayer3.addListener('click',function(event) {
-	  var content = event.featureData.infoWindowHtml;
-	  var legendBox = document.getElementById('infoTxt');
-	  legendBox.innerHTML = content;
-	});
+  var kmlLayer1 = new google.maps.KmlLayer(src1,{preserveViewport: true,map: map});
+  kmlLayer1.addListener('click',function(event) {
+    var content = event.featureData.infoWindowHtml;
+    var legendBox = document.getElementById('infoTxt');
+    legendBox.innerHTML = content;});
 
-    }
-  </script>
-  <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFUnoe7nvyiGLwpNZPR_cTxbU7stZKtsQ&callback=initMap"
-  ></script>
-  <script>
-    loadXMLDoc();
-  </script>
+    var kmlLayer2 = new google.maps.KmlLayer(src2,{
+      preserveViewport: true,
+      map: map});
 
-<div id=maparea>
-  <div id="mapitems">
-    <h2 id="mapitemstitle"> Info </h2> 
-    <hr> <div id="infoTxt"> </div> <hr/>  
-  </div>
-  <div id="map"></div>
-</div>
+      kmlLayer2.addListener('click',function(event) {
+        var content = event.featureData.infoWindowHtml;
+        var legendBox = document.getElementById('infoTxt');
+        legendBox.innerHTML = content;});
+        var kmlLayer3 = new google.maps.KmlLayer(src3,{
+          preserveViewport: true,
+          map: map});
 
+          kmlLayer3.addListener('click',function(event) {
+            var content = event.featureData.infoWindowHtml;
+            var legendBox = document.getElementById('infoTxt');
+            legendBox.innerHTML = content;});
+          }
+        </script>
 
-<!--<div id=xx> </div>-->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFUnoe7nvyiGLwpNZPR_cTxbU7stZKtsQ&callback=initMap"></script>
 
+        <script>loadXMLDoc();</script>
+
+        <!--<div id=xx> </div>-->
+        <div id=maparea>
+          <div id="mapitems">
+            <h2 id="mapitemstitle"> Info </h2>
+            <hr> <div id="infoTxt"> </div> <hr/>
+          </div>
+          <div id="map"></div>
+        </div>
 </body>
 </html>
