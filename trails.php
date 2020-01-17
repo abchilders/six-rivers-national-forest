@@ -14,11 +14,29 @@
 	#dbOut {
 	}
     </style>
-  </head>
-  <body>
 
-<?php require_once("site-header.html");
-?>
+    <!-- This is the Bootstrap CS--> 
+    <!-- Bootstrap CSS-->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  </head>
+ <body>
+
+<!-- This is just hard coded code because it isnt working through the reqrire_once-->
+
+<h1>Six Rivers National Forest</h1>
+  <ul class="nav nav-pills nav-justified">
+  <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+  <li class="nav-item"><a class="nav-link" href="trails.php">Trails</a></li>
+  <li class="nav-item"><a class="nav-link" href="submit.php">Report</a></li>
+  <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+  <li class="nav-item"><a class="nav-link" href="about.php">About</a></li></ul>
+
+
+
+<!-- <?php require_once("site-header.html");
+?> -->
 
   <h1>Trails</h1>
 
