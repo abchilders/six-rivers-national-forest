@@ -11,11 +11,26 @@
           type="text/css" rel="stylesheet" />
 
     <link href="site-style.css" type="text/css" rel="stylesheet" />
+   
+    <!-- Bootstrap CSS-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
   </head>
   <body>
   
-  <?php require_once("site-header.html"); 
-	?>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <ul class="nav nav-pills nav-justified">
+  <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+  <li class="nav-item"><a class="nav-link" href="trails.php">Trails</a></li>
+  <li class="nav-item"><a class="nav-link" href="submit.php">Report</a></li>
+  <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+  <li class="nav-item"><a class="nav-link" href="about.php">About</a></li></ul>
+  </nav>
+
+  <!-- <?php require_once("site-header.html"); 
+	?> --> 
 	
   <h1>About</h1>
 	<p> Six Rivers National Forest is a National Forest located in northwest 

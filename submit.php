@@ -108,11 +108,25 @@ if(array_key_exists("submit", $_POST))
 	<script src="toggle_form_controls.js" type="text/javascript" defer="defer">
     </script>
 
+   <!-- Bootstrap CSS-->
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 
   </head>
   <body>
   <h1>Leave a Report</h1>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <ul class="nav nav-pills nav-justified">
+  <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+  <li class="nav-item"><a class="nav-link" href="trails.php">Trails</a></li>
+  <li class="nav-item"><a class="nav-link" href="submit.php">Report</a></li>
+  <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+  <li class="nav-item"><a class="nav-link" href="about.php">About</a></li></ul>
+  </nav>
   
+<!-- what is this --> 
    <?php
    require_once("site-header.html"); 
    
