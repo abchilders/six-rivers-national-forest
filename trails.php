@@ -65,7 +65,7 @@ exit;
 //List Roads
 
 echo "<h2>Roads:</h2>";
-echo "<table border=1>";
+echo "<table border=1 >";
 $stid = oci_parse($conn,
 "SELECT Survey.name
 FROM Survey, Road_Survey
@@ -118,26 +118,28 @@ FROM Rec_Area_Survey, Survey
 WHERE Rec_Area_Survey.survey_id = Survey.survey_id");
 oci_execute($stid3);
 
-echo "<table border=1>";
+
+while (oci_fetch($stid) && oci_fetch($stid2) && oci_fetch($stid3))
+{
+echo "<div style='text-align:center'>";
+echo "<table border=1 style='margin:auto; width:50%'>";
 echo "<tr>
 <th>Name</th>
 <th>Condition</th>
 <th>Last Updated</th>
 </tr>";
-
-while (oci_fetch($stid) && oci_fetch($stid2) && oci_fetch($stid3))
-{
 echo "<tr>";
 echo "<td><b>",oci_result($stid, 'NAME'), "</b></td>";
 echo "<td>",oci_result($stid2, 'REC_AREA_CONDITION'),"</td>";
 echo "<td>",oci_result($stid2, 'DATE_OF_VISIT'),"</td>";
 echo "</tr>";
+echo "</div>";
 
-echo "<tr><td>Notes:</td>";
-echo "<td colspan='3' style='text-align:center'><i>",oci_result($stid3, 'WEATHER_AND_TEMPERATURE'),"</i></td></tr>";
-echo "<tr><td colspan='3' style='text-align:center'><i>",oci_result($stid3, 'DESCRIPTION'),"</i></td></tr>";
-}
+echo "<tr><td colspan='3' <i>",oci_result($stid3, 'WEATHER_AND_TEMPERATURE'),"</i></td></tr>";
+echo "<tr><td colspan='3' <i>",oci_result($stid3, 'DESCRIPTION'),"</i></td></tr>";
 echo "</table>";
+echo "<br>";
+}
 
 ?>
 </div>
