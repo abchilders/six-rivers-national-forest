@@ -121,22 +121,20 @@ oci_execute($stid3);
 
 while (oci_fetch($stid) && oci_fetch($stid2) && oci_fetch($stid3))
 {
-echo "<div style='text-align:center'>";
-echo "<table border=1 style='margin:auto; width:50%'>";
+echo "<table border=1>"; 
 echo "<tr>
 <th>Name</th>
 <th>Condition</th>
 <th>Last Updated</th>
+<th>Weather</th>
 </tr>";
 echo "<tr>";
 echo "<td><b>",oci_result($stid, 'NAME'), "</b></td>";
 echo "<td>",oci_result($stid2, 'REC_AREA_CONDITION'),"</td>";
 echo "<td>",oci_result($stid2, 'DATE_OF_VISIT'),"</td>";
-echo "</tr>";
-echo "</div>";
+echo "<td><i>",oci_result($stid3, 'WEATHER_AND_TEMPERATURE'),"</i></td></tr>";
 
-echo "<tr><td colspan='3' <i>",oci_result($stid3, 'WEATHER_AND_TEMPERATURE'),"</i></td></tr>";
-echo "<tr><td colspan='3' <i>",oci_result($stid3, 'DESCRIPTION'),"</i></td></tr>";
+echo "<tr><td colspan='4'> <i>",oci_result($stid3, 'DESCRIPTION'),"</i></td></tr>";
 echo "</table>";
 echo "<br>";
 }
