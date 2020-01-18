@@ -14,6 +14,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
+    <h1> Six Rivers National Forest </h1>
 </head>
 
 <body>
@@ -25,17 +26,14 @@
   <li class="nav-item"><a class="nav-link" href="submit.php">Report</a></li>
   <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
   <li class="nav-item"><a class="nav-link" href="about.php">About</a></li></ul>
-  </nav>
-	<?php require_once("site-header.html"); 
-	?>
-	
+  </nav>	
 	<h1> Contact Us </h1>
-	<p> Developers:
+	<p class="lead"> Developers:
 		<ul>
-			<li><a href="mailto:rha25@humboldt.edu?Subject=Six%20Rivers%20National%20Forest">Rawan Almakhloog </a></li> 
-			<li><a href="mailto:abc66@humboldt.edu?Subject=Six%20Rivers%20National%20Forest">Alex Childers</a> </li> 
-			<li><a href="mailto:jlm1455@humboldt.edu?Subject=Six%20Rivers%20National%20Forest">John Mackin </li> 
-			<li><a href="mailto:snp242@humboldt.edu?Subject=Six%20Rivers%20National%20Forest">Sthephany Ponce </li> 
+			<li class="lead"><a href="mailto:rha25@humboldt.edu?Subject=Six%20Rivers%20National%20Forest">Rawan Almakhloog </a></li> 
+			<li class="lead"><a href="mailto:abc66@humboldt.edu?Subject=Six%20Rivers%20National%20Forest">Alex Childers</a> </li> 
+			<li class="lead"><a href="mailto:jlm1455@humboldt.edu?Subject=Six%20Rivers%20National%20Forest">John Mackin </li> 
+			<li class="lead"><a href="mailto:snp242@humboldt.edu?Subject=Six%20Rivers%20National%20Forest">Sthephany Ponce </li> 
 		</ul>
 	</p> 
 

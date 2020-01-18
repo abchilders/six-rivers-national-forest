@@ -112,10 +112,9 @@ if(array_key_exists("submit", $_POST))
    <!-- Latest compiled and minified CSS -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-
+   <h1> Six Rivers National Forest </h1>
   </head>
   <body>
-  <h1>Leave a Report</h1>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <ul class="nav nav-pills nav-justified">
@@ -125,11 +124,11 @@ if(array_key_exists("submit", $_POST))
   <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
   <li class="nav-item"><a class="nav-link" href="about.php">About</a></li></ul>
   </nav>
+
+  <h1>Leave a Report</h1>
   
-<!-- what is this --> 
-   <?php
-   require_once("site-header.html"); 
-   
+<!-- what is this -->    
+<?php
    if(isset($thank_you))
    {
 	   ?> <?= $thank_you ?> <?php
@@ -162,24 +161,24 @@ if(array_key_exists("submit", $_POST))
 				</div> 
 				
 				<div id="name" class="grid-elem">
-					<label for="surveyor_name"> Name: </label> <br/>
+					<label for="surveyor_name" class="lead"> Name: </label> <br/>
 					<input type="text" id="surveyor_name" name="surveyor_name" 
 					required="required" value="Anonymous Surveyor" />
 				</div> 
 				
 				<div id="date" class="grid-elem"> 
-					<label for="date_of_visit"> Date of visit: </label> <br/>
+					<label for="date_of_visit" class="lead"> Date of visit: </label> <br/>
 					<input type="date" id="date_of_visit" name="date_of_visit" 
 					required="required"/>
 				</div> 
 
 				<div id="email_addr" class="grid-elem">
-					<label for="email"> Email: </label> <br/>
+					<label for="email" class="lead"> Email: </label> <br/>
 					<input type="email" id="email" name="email" />
 				</div> 
 				
 				<div id="desc" class="grid-elem"> 
-					<label for="description"> Description, comments, adventures, stories,
+					<label for="description" class="lead"> Description, comments, adventures, stories,
 					or observations: </label> <br/>
 					<textarea rows="5" cols="50" id="description" name="description"></textarea>
 				</div> 
@@ -187,7 +186,7 @@ if(array_key_exists("submit", $_POST))
 				<!-- form fields specifically for Road reports --> 
 				<div id="road_survey">
 					<div id="transport" class="grid-elem"> 
-						<label for="mode_of_transportation"> Mode of transportation: 
+						<label for="mode_of_transportation" class="lead"> Mode of transportation: 
 						</label> <br/>
 						<input type="text" id="mode_of_transportation" 
 						name="mode_of_transportation" required="required" /> 
