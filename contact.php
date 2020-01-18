@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Contact</title>
+    <title>Six Rivers National Forest-Contact</title>
 	
 	<link href="http://nrs-projects.humboldt.edu/~st10/styles/normalize.css"
           type="text/css" rel="stylesheet" />
@@ -21,13 +21,13 @@
 
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <ul class="nav nav-pills nav-justified">
-  <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+  <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
   <li class="nav-item"><a class="nav-link" href="trails.php">Trails</a></li>
   <li class="nav-item"><a class="nav-link" href="submit.php">Report</a></li>
-  <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+  <li class="nav-item"><a class="nav-link active" href="contact.php">Contact</a></li>
   <li class="nav-item"><a class="nav-link" href="about.php">About</a></li></ul>
   </nav>	
-	<h1> Contact Us </h1>
+	<h2> Contact Us </h2>
 	<p class="lead"> Developers:
 		<ul>
 			<li class="lead"><a href="mailto:rha25@humboldt.edu?Subject=Six%20Rivers%20National%20Forest">Rawan Almakhloog </a></li> 

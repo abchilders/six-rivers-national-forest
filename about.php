@@ -3,7 +3,7 @@
 <html>
 
   <head>
-    <title>About</title>
+    <title>Six Rivers National Forest-About</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
 	
@@ -22,17 +22,17 @@
   
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <ul class="nav nav-pills nav-justified">
-  <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+  <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
   <li class="nav-item"><a class="nav-link" href="trails.php">Trails</a></li>
   <li class="nav-item"><a class="nav-link" href="submit.php">Report</a></li>
   <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-  <li class="nav-item"><a class="nav-link" href="about.php">About</a></li></ul>
+  <li class="nav-item"><a class="nav-link active" href="about.php">About</a></li></ul>
   </nav>
 
   <!-- <?php require_once("site-header.html"); 
 	?> --> 
 	
-  <h1>About</h1>
+  <h2>About</h2>
 	<p class="lead"> Six Rivers National Forest is a National Forest located in northwest 
 	California. It encompasses enchanting old-growth redwood forests, 
 	various ecosystems, scenic rivers, and plenty of opportunities for 

@@ -28,8 +28,8 @@
 <h1>Six Rivers National Forest</h1>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <ul class="nav nav-pills nav-justified">
-  <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-  <li class="nav-item"><a class="nav-link" href="trails.php">Trails</a></li>
+  <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+  <li class="nav-item"><a class="nav-link active" href="trails.php">Trails</a></li>
   <li class="nav-item"><a class="nav-link" href="submit.php">Report</a></li>
   <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
   <li class="nav-item"><a class="nav-link" href="about.php">About</a></li></ul>

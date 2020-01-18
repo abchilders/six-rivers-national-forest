@@ -118,9 +118,9 @@ if(array_key_exists("submit", $_POST))
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <ul class="nav nav-pills nav-justified">
-  <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+  <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
   <li class="nav-item"><a class="nav-link" href="trails.php">Trails</a></li>
-  <li class="nav-item"><a class="nav-link" href="submit.php">Report</a></li>
+  <li class="nav-item"><a class="nav-link active" href="submit.php">Report</a></li>
   <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
   <li class="nav-item"><a class="nav-link" href="about.php">About</a></li></ul>
   </nav>
@@ -292,7 +292,7 @@ if(array_key_exists("submit", $_POST))
 				</div>
 			</div>
 		</fieldset>
-		<input type="submit" name="submit" />
+		<input type="submit" class="btn btn-primary" name="submit" />
 	</form>
 
   </body>
