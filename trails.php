@@ -66,77 +66,81 @@ exit;
 
 echo "<h2>Roads:</h2>";
 echo "<table border=1 >";
-$stid = oci_parse($conn,
-"SELECT Survey.name
-FROM Survey, Road_Survey
-WHERE Survey.survey_id = Road_Survey.Survey_id");
-oci_execute($stid);
-$stid2 = oci_parse($conn,
-"SELECT Road_Survey.road_condition, Survey.date_of_visit
-FROM Road_Survey, Survey, road
-WHERE Road_Survey.survey_id = Survey.survey_id
-AND Survey.internal_id = road.internal_id"); 
-oci_execute($stid2);
+
+$stidY = oci_parse($conn,
+"SELECT s.name, s.date_of_visit, r.road_condition
+FROM Road_Survey r, Survey s, road
+WHERE s.survey_id = r.survey_id
+AND s.internal_id = road.internal_id
+ORDER BY s.name ASC, s.date_of_visit DESC
+");
+oci_execute($stidY);
 
 echo "<tr>
-
 <td><b>Name</b></td>
 <td><b>Condition</b></td>
 <td><b>Last Updated</b></td>
 </tr>";
 
-while (oci_fetch($stid) && oci_fetch($stid2))
+$repeat = "";
+
+while (oci_fetch($stidY))
 {
-echo "<tr>";
-echo "<td>",oci_result($stid, 'NAME'), "</td>";
-echo "<td>",oci_result($stid2, 'ROAD_CONDITION'), "</td>";
-echo "<td>",oci_result($stid2, 'DATE_OF_VISIT'),"</td>";
-echo "<tr>";
+
+if (oci_result($stidY,'NAME') != $repeat)
+{
+  echo "<tr>";
+  echo "<td>",oci_result($stidY, 'NAME'), "</td>";
+  echo "<td>",oci_result($stidY, 'ROAD_CONDITION'), "</td>";
+  echo "<td>",oci_result($stidY, 'DATE_OF_VISIT'),"</td>";
+  echo "<tr>";
+}
+$repeat = oci_result($stidY, 'NAME');
 }
 
 echo "</table>";
+
+echo "<br><br>";
 
 //List Rec Areas
 
 echo "<h2>Rec Area:</h2>";
 
-$stid = oci_parse($conn,
-"SELECT Survey.name
-FROM Survey, Rec_Area_Survey
-WHERE Survey.survey_id = Rec_Area_Survey.survey_id");
-oci_execute($stid);
+$stidX = oci_parse($conn,
+"SELECT s.name, s.date_of_visit, s.description, r.Rec_Area_Condition, r.weather_and_temperature
+FROM Rec_Area_survey r, Survey s
+WHERE r.survey_id = s.survey_id
+ORDER BY name ASC, s.date_of_visit DESC");
 
-$stid2 = oci_parse($conn,
-"SELECT Rec_Area_Survey.Rec_Area_Condition, Survey.date_of_visit
-FROM Rec_Area_Survey, Survey
-WHERE Rec_Area_Survey.survey_id = Survey.survey_id");
-oci_execute($stid2);
+oci_execute($stidX);
 
-$stid3 = oci_parse($conn,
-"SELECT Rec_Area_Survey.weather_and_temperature, Survey.description
-FROM Rec_Area_Survey, Survey
-WHERE Rec_Area_Survey.survey_id = Survey.survey_id");
-oci_execute($stid3);
+$repeat = "";
 
-
-while (oci_fetch($stid) && oci_fetch($stid2) && oci_fetch($stid3))
+while (oci_fetch($stidX))
 {
-echo "<table border=1>"; 
-echo "<tr>
-<th>Name</th>
-<th>Condition</th>
-<th>Last Updated</th>
-<th>Weather</th>
-</tr>";
-echo "<tr>";
-echo "<td><b>",oci_result($stid, 'NAME'), "</b></td>";
-echo "<td>",oci_result($stid2, 'REC_AREA_CONDITION'),"</td>";
-echo "<td>",oci_result($stid2, 'DATE_OF_VISIT'),"</td>";
-echo "<td><i>",oci_result($stid3, 'WEATHER_AND_TEMPERATURE'),"</i></td></tr>";
 
-echo "<tr><td colspan='4'> <i>",oci_result($stid3, 'DESCRIPTION'),"</i></td></tr>";
-echo "</table>";
-echo "<br>";
+if (oci_result($stidX,'NAME') != $repeat)
+{
+  echo "<table border=1>"; 
+  echo "<tr>
+  <th>Name</th>
+  <th>Condition</th>
+  <th>Last Updated</th>
+  <th>Weather</th>
+  </tr>";
+  echo "<tr>";
+  echo "<td><b>",oci_result($stidX, 'NAME'), "</b></td>";
+  echo "<td>",oci_result($stidX, 'REC_AREA_CONDITION'),"</td>";
+  echo "<td>",oci_result($stidX, 'DATE_OF_VISIT'),"</td>";
+  echo "<td><i>",oci_result($stidX, 'WEATHER_AND_TEMPERATURE'),"</i></td></tr>";
+
+  echo "<tr><td colspan='4'> <i>",oci_result($stidX, 'DESCRIPTION'),"</i></td></tr>";
+  echo "</table>";
+  echo "<br>";
+}
+
+$repeat = oci_result($stidX,'NAME');
+
 }
 
 ?>
