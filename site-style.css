@@ -2,8 +2,8 @@
        * element that contains the map. */
       html, body {
         height: 100%;
-        margin: 0;
-        padding: 0;
+        margin: 1;
+        padding: 0.5;
       }
       #navbar {
         list-style-type: none;
