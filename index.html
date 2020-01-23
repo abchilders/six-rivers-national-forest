@@ -4,40 +4,53 @@
 <head>
   <title>Six Rivers</title>
   <!-- Free hadrcoding style, according to oreginal this could be removed-->
-  <style> html,
-    body {height: 100%;
-          margin: 0;
-          padding: 0;
-          /*background-color: #ffc06e*/ ;}
+  <style> html, body{
+    height: 100%;
+    margin: 1em;
+    padding: 0.5em;
+    /*background-color: #ffc06e;*/
+  }
 	 /* h1{background-color:#ffc06e;
 		   padding: 0;
        margin: 0;}*/
+	/* --- this controls the map settings -- */
+		li{
+      font-size: 20px;
+			color: white;
+     /*background-color: #ffc06e;*/
+      }
+		ul{
+      /*background-color:#ffc06e;*/
+			color:white;
+    }
+	/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
+		#maparea {
+      height: 75%;
+			width: 100%;
+      position: sticky;
+      /*display: flex-bottom;*/
+    }
 
-	/* --- this controls the map settings -- */ 
-		li{font-size: 20px;
-			 color: white;
-			 /*background-color: #ffc06e*/;}
-		ul{/*background-color:#ffc06e*/;
-			color:white;}
-	/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */ 
+		#mapitems {
+      border-style: solid;
+      flex: 1;
+    }
 
-		#maparea {height: 75%;
-			  width: 100%;
-                          position: sticky;
-                          display: flex-bottom;} 
+		#mapitemstitle {
+      text-align: center;
+    }
 
-		#mapitems {border-style: solid;
-              flex: 1;}
+		#map {
+      height: 100%;
+      width: 100%;
+      border: thin solid #333;
+    }
 
-		#mapitemstitle {text-align: center;}
-
-		#map {height: 100%;
-          width: 100%;
-          border: thin solid #333;}
-
-		#infoTxt {text-align: center;}
-
+		#infoTxt {
+      text-align: center;
+    }
   </style>
+
 <!-- Required meta tags -->
   <meta name="viewport" content="initial-scale=1.0">
   <meta charset="utf-8">
