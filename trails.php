@@ -129,7 +129,7 @@ if (oci_result($stidX,'NAME') != $repeat)
   <th>Weather</th>
   </tr>";
   echo "<tr>";
-  echo "<td><b>",oci_result($stidX, 'NAME'), "</b></td>";
+  echo "<td>",oci_result($stidX, 'NAME'), "</td>";
   echo "<td>",oci_result($stidX, 'REC_AREA_CONDITION'),"</td>";
   echo "<td>",oci_result($stidX, 'DATE_OF_VISIT'),"</td>";
   echo "<td><i>",oci_result($stidX, 'WEATHER_AND_TEMPERATURE'),"</i></td></tr>";
