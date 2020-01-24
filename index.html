@@ -76,37 +76,49 @@
 
 <script>function
 initMap(){
+  //Sources for KML files to be plugged in to map. Full URL must be used.
   var src1 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-MVRoads.kml';
   var src2 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-RecAreaActivities.kml';
   var src3 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-RecOpps.kml';
+
   var map = new google.maps.Map(document.getElementById('map'),
   {center: new google.maps.LatLng(41.2623, -123.5677),zoom: 8});
 
-  var kmlLayer1 = new google.maps.KmlLayer(src1,{preserveViewport: true,map: map});
+  //LAYER 1
+  var kmlLayer1 = new google.maps.KmlLayer(src1,{
+    map: map,
+    supressInfoWindows: true
+    });
+
   kmlLayer1.addListener('click',function(event) {
     var content = event.featureData.infoWindowHtml;
     var legendBox = document.getElementById('infoTxt');
     legendBox.innerHTML = content;});
 
-    var kmlLayer2 = new google.maps.KmlLayer(src2,{
-      preserveViewport: true,
-      map: map});
+  //LAYER 2
+  var kmlLayer2 = new google.maps.KmlLayer(src2,{
+    preserveViewport: true,
+    map: map});
 
-      kmlLayer2.addListener('click',function(event) {
-        var content = event.featureData.infoWindowHtml;
-        var legendBox = document.getElementById('infoTxt');
-        legendBox.innerHTML = content;});
-        var kmlLayer3 = new google.maps.KmlLayer(src3,{
-          preserveViewport: true,
-          map: map});
+  kmlLayer2.addListener('click',function(event) {
+    var content = event.featureData.infoWindowHtml;
+    var legendBox = document.getElementById('infoTxt');
+    legendBox.innerHTML = content;});
 
-          kmlLayer3.addListener('click',function(event) {
-            var content = event.featureData.infoWindowHtml;
-            var legendBox = document.getElementById('infoTxt');
-            legendBox.innerHTML = content;});
-          }
+  //LAYER 3
+  var kmlLayer3 = new google.maps.KmlLayer(src3,{
+    preserveViewport: true,
+    map: map});
+
+  kmlLayer3.addListener('click',function(event) {
+    var content = event.featureData.infoWindowHtml;
+    var legendBox = document.getElementById('infoTxt');
+    legendBox.innerHTML = content;});
+}//END initMap()
+
 </script>
 
+<!-- Insert Google API key below -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFUnoe7nvyiGLwpNZPR_cTxbU7stZKtsQ&callback=initMap"></script>
 
 <script>loadXMLDoc();</script>

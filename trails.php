@@ -13,6 +13,11 @@
     <style>
 	#dbOut {
 	}
+
+	#trailBoxs
+	{
+	  box-shadow: 5px 10px #888888;
+	}
     </style>
 
     <!-- This is the Bootstrap CS--> 
@@ -65,10 +70,9 @@ exit;
 //List Roads
 
 echo "<h2>Roads:</h2>";
-echo "<table border=1 >";
 
 $stidY = oci_parse($conn,
-"SELECT s.name, s.date_of_visit, r.road_condition
+"SELECT s.name, s.date_of_visit, r.road_condition, s.description
 FROM Road_Survey r, Survey s, road
 WHERE s.survey_id = r.survey_id
 AND s.internal_id = road.internal_id
@@ -76,11 +80,6 @@ ORDER BY s.name ASC, s.date_of_visit DESC
 ");
 oci_execute($stidY);
 
-echo "<tr>
-<td><b>Name</b></td>
-<td><b>Condition</b></td>
-<td><b>Last Updated</b></td>
-</tr>";
 
 $repeat = "";
 
@@ -89,16 +88,23 @@ while (oci_fetch($stidY))
 
 if (oci_result($stidY,'NAME') != $repeat)
 {
+  echo "<table border = 1, id='trailBoxs' >";
+  echo "<tr>
+  <td><b>Name</b></td>
+  <td><b>Condition</b></td>
+  <td><b>Last Updated</b></td>
+  </tr>";
   echo "<tr>";
-  echo "<td>",oci_result($stidY, 'NAME'), "</td>";
+  echo "<td><b>",oci_result($stidY, 'NAME'), "</b></td>";
   echo "<td>",oci_result($stidY, 'ROAD_CONDITION'), "</td>";
   echo "<td>",oci_result($stidY, 'DATE_OF_VISIT'),"</td>";
+  echo "<tr><td colspan='4'> <i>",oci_result($stidY, 'DESCRIPTION'),"</i></td></tr>";
   echo "<tr>";
+  echo "</table>";
+  echo "<br>";
 }
 $repeat = oci_result($stidY, 'NAME');
 }
-
-echo "</table>";
 
 echo "<br><br>";
 
@@ -121,7 +127,7 @@ while (oci_fetch($stidX))
 
 if (oci_result($stidX,'NAME') != $repeat)
 {
-  echo "<table border=1>"; 
+  echo "<table border=1 id='trailBoxs'>"; 
   echo "<tr>
   <th>Name</th>
   <th>Condition</th>
@@ -129,7 +135,7 @@ if (oci_result($stidX,'NAME') != $repeat)
   <th>Weather</th>
   </tr>";
   echo "<tr>";
-  echo "<td>",oci_result($stidX, 'NAME'), "</td>";
+  echo "<td><b>",oci_result($stidX, 'NAME'), "</b></td>";
   echo "<td>",oci_result($stidX, 'REC_AREA_CONDITION'),"</td>";
   echo "<td>",oci_result($stidX, 'DATE_OF_VISIT'),"</td>";
   echo "<td><i>",oci_result($stidX, 'WEATHER_AND_TEMPERATURE'),"</i></td></tr>";
