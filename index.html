@@ -74,8 +74,11 @@
   <li class="nav-item"><a class="nav-link" href="about.php">About</a></li></ul>
   </nav>
 
-<script>function
-initMap(){
+<script>
+
+//BEGIN initMap, script for building map and adding KML layers using Google's map API
+function initMap(){
+
   //Sources for KML files to be plugged in to map. Full URL must be used. The files must be publicly accessible!
   var src1 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-MVRoads.kml';
   var src2 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-RecAreaActivities.kml';
@@ -91,6 +94,7 @@ initMap(){
     preserveViewport: true 
     });
 
+  //Add infoWindow content to info box when a map object is clicked
   kmlLayer1.addListener('click',function(event) {
     var content = event.featureData.infoWindowHtml;
     var legendBox = document.getElementById('infoTxt');
@@ -131,11 +135,14 @@ initMap(){
 <script>loadXMLDoc();</script>
         <!--<div id=xx> </div>-->
         <div id=maparea>
+	  <div id="map"></div>
           <div id="mapitems">
             <h2 id="mapitemstitle"> Info </h2>
             <hr> <div id="infoTxt"> </div> <hr/>
           </div>
-          <div id="map"></div>
         </div> 
+
+	<br><br>
+
 </body>
 </html>
