@@ -76,7 +76,7 @@
 
 <script>function
 initMap(){
-  //Sources for KML files to be plugged in to map. Full URL must be used.
+  //Sources for KML files to be plugged in to map. Full URL must be used. The files must be publicly accessible!
   var src1 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-MVRoads.kml';
   var src2 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-RecAreaActivities.kml';
   var src3 = 'http://nrs-projects.humboldt.edu/~jlm1455/SixRivers/MapFiles/SR-RecOpps.kml';
@@ -87,7 +87,7 @@ initMap(){
   //LAYER 1
   var kmlLayer1 = new google.maps.KmlLayer(src1,{
     map: map,
-    supressInfoWindows: true,
+    supressInfoWindows: true, //This attribute is supposed to supress the window popup when a map element is clicked so the info only appears in the info box, but it's not working.
     preserveViewport: true 
     });
 
@@ -125,7 +125,7 @@ initMap(){
 
 </script>
 
-<!-- Insert Google API key below -->
+<!-- Insert Google API key below, a unique key will have to be generated and plugged in by whoever hosts this site after registering it with Google.  -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFUnoe7nvyiGLwpNZPR_cTxbU7stZKtsQ&callback=initMap"></script>
 
 <script>loadXMLDoc();</script>
