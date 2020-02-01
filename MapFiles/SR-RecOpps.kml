@@ -5,9 +5,9 @@
 	<Snippet maxLines="0"></Snippet>
 	<Style id="IconStyle00">
 		<IconStyle>
-			<scale>0.25</scale>
+			<scale>1</scale>
 			<Icon>
-				<href>Layer0_Symbol_14149048_0.png</href>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
 			</Icon>
 		</IconStyle>
 		<LabelStyle>
